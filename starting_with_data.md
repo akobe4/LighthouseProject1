@@ -56,6 +56,7 @@ LIMIT 10
 ```
 
 Answer: The top 10 selling products based on units sold are: 
+
     productname	                                        totalunitssold
 
     Grip Highlighter Pen 3 Pack	                        50
