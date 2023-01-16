@@ -2,7 +2,7 @@ Question 1: Determine the average amount of time spent on site for those who mad
 
 SQL Queries:
 ```sql
---average amount  of time spent on site for transactions with a purchase vs withour a purchase 
+--average amount  of time spent on site for transactions with a purchase vs without a purchase 
 WITH T1 AS (
 SELECT timeonsite 
     ,CASE
@@ -98,17 +98,3 @@ ORDER BY totalrevenue DESC
 Answer:
 July 2017 is the month with the highest revenue at $1348.
 
-
-Question 4: 
-
-SQL Queries:
-
-Answer:
-
-
-
-Question 5: 
-
-SQL Queries:
-
-Answer:
