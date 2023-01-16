@@ -37,7 +37,7 @@ CSV HEADER;
 ```
 
 - cleaned the data, removing data not relevant for project and divided prices by 1,000,000
-- created queries t oanswer questions about the data
+- created queries to answer questions about the data
 
 
 ## Results
@@ -45,14 +45,22 @@ Through the questions asked in the assignment I learned, which makes logical sen
 
 Through my own queries, I found that customers who buy products spend less time on the site than those who do not buy anything. Time spent on site is doubled when a purchase is not made - 13 min vs 6 min. 
 
+Three different Nest products fell within the top 10 items purchased, the most purchased item was the Grip Highlighter Pen 3 Pack at 50 units. 
 
+The months that generated the most revnue were in 2017, with July generating the most revenue $1348, closely followed by June $1343. 
 
 ## Challenges 
-- not completely understanding the data set when I first started to clean and query data. This casued me needing to re-upload the data multiple times as data important to the questions asked has been deleted 
-- ummmm 
+I did not completely understanding the data set when I first started to clean and query data. This casued me needing to re-upload the data multiple times as data important to the questions asked has been deleted. As a consequence of not really understanding the dataset properly it took me a long time to get my head around what data was appropriate to answer the assignment questions. 
+
+I had lots of hiccups and troubleshooting while uploading the data into postres. It came with a lot of trial and error and trying to better understand the SQL datatypes. For example I kept getting an error while using INT for revenue in the analytics table, I finally realized that in order for me to import it as a number I needed to use INT8. 
+
 
 ## Future Goals
-With more time I would understand the data set better, look for outliers, ensure all data types chosen for importing the data were correct once the data went it. A better overall understanding of the data going in would produce better data coming out. 
+With more time I would understand the data set better. I would also do a more thorough data cleaning process as data cleaning was minimal. I did realize part way through that I should have done more, however I did not have the time to go back to it. Examples of what I would do in the future are  look for outliers, ensure all data types chosen for importing the data were correct once the data went it. 
+
+A better overall understanding of the data going in would produce better data coming out. 
+
+With more time/in the future I would have a specific goal in mind for the data and ask questions that fit the overall goal. In this assignment I just thought of random questions that I felt like could show different aspects of my SQL knowledge. 
 
 
 
