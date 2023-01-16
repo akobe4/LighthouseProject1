@@ -108,8 +108,6 @@ The average number of products ordered for Mountain View and New York was 1.5. E
 
 
 
-
-
 **Question 3: Is there any pattern in the types (product categories) of products ordered from visitors in each city and country?**
 
 ```SQL
