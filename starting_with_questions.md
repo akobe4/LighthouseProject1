@@ -225,18 +225,18 @@ The top selling product in Spain is the Waze Dress socks and in the United State
 
 The top selling products in cities are (only given when the top selling product quantity is >1): 
 
-Atlanta        Reusable Shopping Bag
+	Atlanta        Reusable Shopping Bag
 
-Houston	        Google Sunglasses
+	Houston	        Google Sunglasses
 
-Madrid	        Waze Dress Socks
+	Madrid	        Waze Dress Socks
 
-Mountain View	Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel
+	Mountain View	Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel
 
-New York	    Google Mens 100% Cotton Short Sleeve Hero Tee White and 
-	            YouTube Mens Short Sleeve Hero Tee White
+	New York	    Google Mens 100% Cotton Short Sleeve Hero Tee White and 
+		            YouTube Mens Short Sleeve Hero Tee White
 
-Salem Red       Spiral Google Notebook
+	Salem Red       Spiral Google Notebook
 
 
 
