@@ -56,18 +56,18 @@ LIMIT 10
 ```
 
 Answer: The top 10 selling products based on units sold are: 
-    productname	                                    totalunitssold
-    
-    Grip Highlighter Pen 3 Pack	                    50
-    Google Alpine Style Backpack	                41
-    Google Twill Cap	                            28
-    Google Toddler Raglan Shirt Blue Heather/Navy	20
-    Nest® Protect Smoke + CO White Wired Alarm-USA	17
-    SPF-15 Slim & Slender Lip Balm	                16
-    Nest® Learning Thermostat 3rd Gen-USA - White	12
-    Waze Pack of 9 Decal Set	                    10
-    Google Women's Scoop Neck Tee White	            8
-    Nest® Cam Indoor Security Camera - USA	        8
+    productname	                                        totalunitssold
+
+    Grip Highlighter Pen 3 Pack	                        50
+    Google Alpine Style Backpack	                    41
+    Google Twill Cap	                                28
+    Google Toddler Raglan Shirt Blue Heather/Navy	    20
+    Nest® Protect Smoke + CO White Wired Alarm-USA	    17
+    SPF-15 Slim & Slender Lip Balm	                    16
+    Nest® Learning Thermostat 3rd Gen-USA - White	    12
+    Waze Pack of 9 Decal Set	                        10
+    Google Women's Scoop Neck Tee White	                8
+    Nest® Cam Indoor Security Camera - USA	            8
 
 
 
