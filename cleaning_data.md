@@ -4,8 +4,6 @@ In cleaning the data, columns were removed when they had no data/not enough data
 Unit_price in the "analytics" table was divided by 1,000,000 and set to a number with two decimal points as standard for money. 
 
 
-
-
 Queries:
 ```SQL
 --cleaning all_sessions table 
