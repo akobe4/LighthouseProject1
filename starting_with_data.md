@@ -73,11 +73,30 @@ Answer: The top 10 selling products based on units sold are:
 
 
 Question 3: 
+Which month has the highest revnue? 
 
 SQL Queries:
+```sql
+WITH T1 AS (
+SELECT DATE_TRUNC('month', sessiondate)  AS revenueMonth
+	   ,sum(revenue) AS totalrevenue
+FROM all_sessions al
+LEFT JOIN analytics an
+ON al.visitid = an.visitid
+GROUP BY revenueMonth
+ORDER BY revenueMonth
+  )
+ 
+SELECT  revenuemonth
+	   ,totalrevenue
+FROM T1
+WHERE totalrevenue IS NOT NULL
+GROUP BY revenuemonth, totalrevenue
+ORDER BY totalrevenue DESC
+```
 
 Answer:
-
+July 2017 is the month with the highest revenue at $1348.
 
 
 Question 4: 
