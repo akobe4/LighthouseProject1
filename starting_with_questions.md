@@ -5,100 +5,102 @@ Answer the following questions and provide the SQL queries used to find the answ
 
 
 SQL Queries:
+```SQL
+WITH T1 AS (
+SELECT country
+	   ,SUM(totaltransactionrevenue) as sumTransaction
+FROM all_sessions 
+	WHERE country NOT LIKE '%not%'
+GROUP BY country
+ORDER BY country
+   )
 
+SELECT country
+	  ,sumtransaction
+FROM T1 
+	WHERE sumtransaction IS NOT NULL 
+GROUP BY country, sumtransaction 
+ORDER BY country
 
+WITH T1 AS (
+SELECT city
+	   ,SUM(totaltransactionrevenue) as sumTransaction
+FROM all_sessions 
+	WHERE city NOT LIKE '%not%'
+GROUP BY city
+ORDER BY city
+   )
+
+SELECT city
+	  ,sumtransaction
+FROM T1 
+	WHERE sumtransaction IS NOT NULL 
+GROUP BY city, sumtransaction 
+ORDER BY sumtransaction DESC
 
 Answer:
-
+The country with the highest transaction revenue is USA with $13123.00 of revenue. The city with the highest transaction revenue is San Fransisco with $1561.00 of revenue. 
 
 
 
 **Question 2: What is the average number of products ordered from visitors in each city and country?**
 
-```sql
-SQL Queries:
+
 WITH T1 AS (
 SELECT  country
-	   ,productsku
-	   ,count(productsku) AS productCount
+	   ,COUNT(productquantity) AS productCount
 FROM all_sessions
 	WHERE country NOT LIKE '%not%'
-	GROUP BY country, v2productname, productsku
+	GROUP BY country, productsku
 	ORDER BY country
-)
+),
 
+T2 AS  (
 SELECT country
-	   ,ROUND(AVG(productcount), 2) AS avProductCount 
+      ,productcount
 FROM T1
-GROUP BY country
+	WHERE productcount  != 0
+GROUP BY country, productcount
 ORDER BY country
+  )
+  
+SELECT country
+	  ,ROUND(AVG(productcount), 2) AS avProductsOrdered 
+FROM T2
+GROUP BY country 
+ORDER BY avProductsOrdered DESC
 
 
 WITH T1 AS (
-SELECT  city
-	   ,productsku
-	   ,count(productsku) AS productCount
+SELECT   city
+		,productsku
+	   ,COUNT(productQuantity) AS productCount
 FROM all_sessions
 	WHERE city NOT LIKE '%not%'
-	GROUP BY city, v2productname, productsku
+	GROUP BY city, productsku
 	ORDER BY city
-)
+	),
 
+T2 AS  (
 SELECT city
-	   ,ROUND(AVG(productcount), 2) AS avProductsOrdered 
+      ,productcount
 FROM T1
-GROUP BY city
+	WHERE productcount  != 0
+GROUP BY city, productcount
 ORDER BY city
+  )
+  
+SELECT city
+	  ,ROUND(AVG(productcount), 2) AS avProductsOrdered 
+FROM T2
+GROUP BY city 
+ORDER BY avProductsOrdered DESC
 
 
 Answer:
-results of first 20 shown below
-        Country
-country	        avProductsOrdered 
-Albania	                1.00
-Algeria	                1.00
-Argentina	            1.16
-Armenia	                1.00
-Australia	            1.74
-Austria	                1.11    
-Bahamas	                1.00
-Bahrain	                1.00
-Bangladesh	            1.14
-Barbados	            1.00
-Belarus	                1.00
-Belgium	                1.26
-Belize	                1.00
-Bolivia	                1.00
-Bosnia & Herzegovina	1.00
-Botswana	            1.00
-Brazil	                1.52
-Brunei	                1.00
-Bulgaria	            1.00
-Cambodia	            1.00
+The average number of products ordered are 1 for Canada, Colombia, Finland,France, Argentina, Ireland, Mexico, Spain,India. The US is an average of 3 products ordered. 
 
-    City
-city	avproductsOrdered
-Adelaide	1.00
-Ahmedabad	1.00
-Akron	    1.00
-Alexandria	1.00
-Amã	        1.00
-Amsterdam	1.00
-Ann Arbor	1.06
-Antalya	    1.00
-Antwerp	    1.00
-Appleton	1.00
-Ashburn	    1.00
-Asuncion	1.00
-Athens	    1.00
-Atlanta	    1.27
-Auckland	1.00
-Austin	    1.27
-Avon	    1.00
-Bandung	    1.00
-Bangkok	    1.03
-
-
+The average number of products ordered for Mountain View and New York was 1.5. Everyother city had an average of 1.
 
 
 
@@ -108,29 +110,46 @@ Bangkok	    1.03
 
 
 SQL Queries:
-```SQL
+WITH T1 AS  (
+SELECT city
+      ,v2productcategory
+      ,productquantity
+FROM all_sessions 
+	WHERE productquantity != 0
+GROUP BY city, v2productcategory, productquantity
+ORDER BY city
+	  )
+
 SELECT city
 	  ,v2productcategory
-	 FROM all_sessions a
+FROM T1
 	 WHERE NOT (city LIKE  '%not%'
 	 OR v2productcategory LIKE '%not%')
 GROUP BY city, v2productcategory
 ORDER BY city, v2productcategory;	
 
+
+WITH T1 AS  (
+SELECT country
+      ,v2productcategory
+      ,productquantity
+FROM all_sessions 
+	WHERE productquantity != 0
+GROUP BY country, v2productcategory, productquantity
+ORDER BY country
+	  )
+
 SELECT country
 	  ,v2productcategory
-	 FROM all_sessions 
-	 WHERE NOT (country LIKE  '%not%' 
+FROM T1
+	 WHERE NOT (country LIKE  '%not%'
 	 OR v2productcategory LIKE '%not%')
 GROUP BY country, v2productcategory
-ORDER BY country, v2productcategory;
-
-
+ORDER BY country, v2productcategory;	
 
 
 Answer:
-There doesn't appear to be an obvious pattern of product types ordered from visitors in each country. There is some pattern of product types ordered by city. Some cities have more home type products ordered such as accessories and electronics, while other cities seem to have more apparal orders. 
-
+There does not appear to be an obvious pattern of product types ordered from visitors in each country. There does seem to be a pattern with products ordered by city. Those cities within the Silicon Valley are ordering Home/Nest - examples: San Francisco, Palo Alto and San Jose.
 
 
 
@@ -138,55 +157,97 @@ There doesn't appear to be an obvious pattern of product types ordered from visi
 
 
 SQL Queries:
-```SQL
 WITH T1 AS (
 SELECT  country
 	   ,v2productname
-	   ,count(v2productname) AS productCount
+	   ,productsku
+	   ,SUM(productquantity) AS productCount
 FROM all_sessions
 	WHERE country NOT LIKE '%not%'
-	GROUP BY country, v2productname
+	GROUP BY country, v2productname, productsku
 	ORDER BY country
-)
+),
+
+T2 AS (
+SELECT country
+	  ,v2productname
+	  ,productsku
+	  ,productcount
+FROM T1 
+	WHERE productcount != 0 
+	)
 
 SELECT country
-	   ,MAX(productCount) AS maxProductCount
-FROM T1
-GROUP BY country
+	  ,v2productname
+      ,MAX(productCount) AS maxProductCount
+FROM T2
+GROUP BY country, v2productname
 ORDER BY country
 
-```sql 
+
+
 WITH T1 AS (
 SELECT  city
 	   ,v2productname
 	   ,productsku
-	   ,count(v2productname) AS productCount
+	   ,SUM(productquantity) AS productCount
 FROM all_sessions
 	WHERE city NOT LIKE '%not%'
 	GROUP BY city, v2productname, productsku
 	ORDER BY city
-)
+),
+
+T2 AS (
+SELECT city
+	  ,v2productname
+	  ,productsku
+	  ,productcount
+FROM T1 
+	WHERE productcount != 0 
+	)
 
 SELECT city
-	   ,MAX(productCount) AS maxProductCount
-FROM T1
-GROUP BY city
-ORDER BY city
+	  ,v2productname
+      ,MAX(productCount) AS maxProductCount
+FROM T2
+GROUP BY city, v2productname
+ORDER BY city, maxProductCount DESC
 
 Answer:
+The top selling product in Spain is the Waze Dress socks and in the United States is the Leatherette Journal. For all other countries the quantity of the top selling product is 1. 
 
-
-
-
+The top selling products in cities are (only given when the top selling product quantity is >1): 
+Atlanta	        Reusable Shopping Bag
+Houston	        Google Sunglasses
+Madrid	        Waze Dress Socks
+Mountain View	Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel
+New York	    Google Mens 100% Cotton Short Sleeve Hero Tee White and 
+	            YouTube Mens Short Sleeve Hero Tee White
+Salem Red       Spiral Google Notebook
 
 **Question 5: Can we summarize the impact of revenue generated from each city/country?**
 
 SQL Queries:
+WITH T1 AS (
+SELECT al.visitid
+      ,country
+	  ,revenue
+FROM all_sessions al
+LEFT JOIN analytics an
+ON al.visitid = an.visitid
+	WHERE revenue IS NOT NULL 
+GROUP BY al. visitid, country, revenue
+ORDER BY country
+	)
 
+SELECT country
+       ,SUM(revenue) AS totalRevenue
+FROM T1
+GROUP BY country
 
 
 Answer:
-
+What we can learn from total revenue generated is that  only 3 countries generated tangible revenue. Israel	$32, , Switzerland	$16 and United States	$4629
 
 
 
