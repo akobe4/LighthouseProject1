@@ -8,6 +8,7 @@ Unit_price in the "analytics" table was divided by 1,000,000 and set to a number
 
 Queries:
 ```SQL
+--cleaning all_sessions table 
 ALTER TABLE all_sessions
 	DROP COLUMN	sessionqualitydim,
 	DROP COLUMN	productrefundamount,
@@ -20,10 +21,12 @@ ALTER TABLE all_sessions
 	ALTER COLUMN totaltransactionrevenue SET DATA TYPE DECIMAL(6,2);
 
  
-
+--cleaning analytics table 
 UPDATE analytics SET unit_price = unit_price/1000000
 
 ALTER TABLE analytics
 	ALTER COLUMN unit_price SET DATA TYPE DECIMAL(5,2);
 
 UPDATE analytics SET revenue = revenue/1000000
+
+```
